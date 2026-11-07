@@ -1,17 +1,45 @@
-GDA Moto — preparação da tarifa por rota real
+GDA Moto — publicação da tarifa por rota real
 
-Arquivos:
-- supabase/functions/request-ride/index.ts: Edge Function que valida o usuário, consulta a rota viária pelo OSRM e calcula a tarifa.
+ARQUIVOS DO PROJETO
+- supabase/functions/request-ride/index.ts: Edge Function que autentica o passageiro, calcula a rota viária pelo OSRM e calcula a tarifa no servidor.
 - supabase/sql/request_ride_from_edge.sql: função SQL interna chamada pela Edge Function.
+- index.html: o aplicativo já chama db.functions.invoke('request-ride', ...). Não é necessário alterar o frontend para apontar para a Edge Function.
 
-Regra de preço:
+REGRA DE PREÇO
 - R$ 2,50 por km de rota de rua.
 - Valor mínimo: R$ 7,00.
-- Comissão da plataforma: 10% do valor da corrida, registrada ao finalizar (a função update_ride_status existente deve continuar sendo usada).
+- Comissão da plataforma: 10%, registrada ao finalizar a corrida pela função update_ride_status.
+- O preço não é recebido do aparelho do passageiro; é calculado no servidor.
 
-IMPORTANTE:
-1. Não publique a Edge Function antes de executar o SQL.
-2. No Supabase, crie/deploy a Edge Function com o nome request-ride e cole o conteúdo de index.ts.
-3. A função usa os secrets padrão SUPABASE_URL, SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY disponíveis no ambiente Edge Functions. Nunca coloque service_role no index.html.
-4. O frontend ainda chama a RPC antiga request_ride. Ele só deverá ser atualizado para chamar request-ride depois que a Edge Function estiver publicada e testada.
-5. O OSRM público é adequado para protótipo/testes, mas tem limites de uso e não oferece SLA. Para operação comercial, contratar/provisionar um serviço de rotas confiável.
+ESTADO DA IMPLEMENTAÇÃO
+- O SQL request_ride_from_edge foi executado no banco e suas permissões foram verificadas: somente postgres e service_role podem executar.
+- A função antiga request_ride também não está acessível a anon/authenticated.
+- O código do frontend já chama a Edge Function pelo nome exato request-ride.
+- Ainda é necessário confirmar/publicar a Edge Function no projeto Supabase e testar uma chamada real autenticada.
+
+PUBLICAÇÃO PELO PAINEL SUPABASE (SEM COMPUTADOR)
+1. Abra o projeto GDA-Moto no Supabase.
+2. Entre em Edge Functions.
+3. Use Deploy a new function > Via Editor.
+4. Dê exatamente o nome request-ride (minúsculo, com hífen).
+5. Substitua o exemplo do editor pelo conteúdo completo de supabase/functions/request-ride/index.ts deste repositório.
+6. Clique em Deploy function e aguarde a confirmação.
+7. Na página da função, confirme que o nome publicado é request-ride.
+
+SECRETS E SEGURANÇA
+- A função utiliza as variáveis de ambiente SUPABASE_URL, SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY disponibilizadas no ambiente Edge Functions.
+- Nunca inserir a service_role no index.html, no GitHub ou em mensagens.
+- A Edge Function valida o token do usuário com Supabase Auth e usa service_role somente no servidor para chamar request_ride_from_edge.
+- Não conceder EXECUTE da request_ride_from_edge a anon ou authenticated.
+
+TESTE APÓS PUBLICAÇÃO
+1. Entrar no aplicativo com uma conta de passageiro.
+2. Obter localização e escolher destino no mapa.
+3. Solicitar corrida.
+4. Confirmar a resposta com ride_id, distance_km e estimated_price.
+5. Conferir no banco se a corrida foi criada com o valor calculado.
+6. Testar recusa de chamadas sem login e forma de pagamento inválida.
+
+OBSERVAÇÃO SOBRE ROTAS
+- O código usa o serviço público OSRM e o perfil driving para obter uma rota viária. É adequado para protótipo/testes, mas o serviço público tem limites e não oferece SLA. Antes de operação comercial, avaliar um provedor de rotas com disponibilidade e suporte contratados.
+- A tarifa é estimada pela rota retornada; condições reais da via, desvios e particularidades de motocicletas podem alterar o percurso.
