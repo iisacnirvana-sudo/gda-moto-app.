@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#facc15"><title>GDA Moto</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
-:root{--yellow:#facc15;--black:#171717;--red:#dc2626;--muted:#737373;--bg:#f5f5f5}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#171717}.top{background:var(--black);color:white;padding:16px max(16px,env(safe-area-inset-left));border-bottom:5px solid var(--yellow)}.brand{font-size:24px;font-weight:900;letter-spacing:1px}.brand span{color:var(--yellow)}.sub{font-size:12px;color:#d4d4d4}.wrap{max-width:900px;margin:auto;padding:14px}.card{background:white;border:1px solid #e5e5e5;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 2px 8px #00000008}.hidden{display:none!important}h2{font-size:19px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}label{display:block;font-size:13px;font-weight:700;margin:10px 0 5px}input,select{width:100%;padding:13px;border:1px solid #d4d4d4;border-radius:10px;font:inherit;background:white}button{border:0;border-radius:11px;padding:13px 15px;font-weight:800;font-size:14px;background:var(--yellow);color:#171717;cursor:pointer}button.secondary{background:#262626;color:white}button.red{background:var(--red);color:white}button:disabled{opacity:.5}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1}.note{font-size:12px;color:var(--muted);line-height:1.45}.status{padding:10px 12px;border-radius:10px;background:#fef9c3;font-size:13px;margin:10px 0}.good{background:#dcfce7}.bad{background:#fee2e2}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs button{background:#e5e5e5}.tabs button.active{background:var(--yellow)}#map{height:340px;border-radius:12px;z-index:1}.ride{border:1px solid #e5e5e5;padding:12px;border-radius:12px;margin:8px 0}.small{font-size:12px;color:var(--muted)}.footer{text-align:center;padding:20px;color:#737373;font-size:11px}.pill{display:inline-block;border-radius:20px;padding:4px 9px;background:#fef3c7;font-size:11px;font-weight:800}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.danger{color:#b91c1c}.ok{color:#15803d}
+:root{--yellow:#facc15;--black:#171717;--red:#dc2626;--muted:#737373;--bg:#f5f5f5}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#171717}.top{background:var(--black);color:white;padding:16px max(16px,env(safe-area-inset-left));border-bottom:5px solid var(--yellow)}.brand{font-size:24px;font-weight:900;letter-spacing:1px}.brand span{color:var(--yellow)}.sub{font-size:12px;color:#d4d4d4}.wrap{max-width:900px;margin:auto;padding:14px}.card{background:white;border:1px solid #e5e5e5;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 2px 8px #00000008}.hidden{display:none!important}h2{font-size:19px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}label{display:block;font-size:13px;font-weight:700;margin:10px 0 5px}input,select{width:100%;padding:13px;border:1px solid #d4d4d4;border-radius:10px;font:inherit;background:white}button{border:0;border-radius:11px;padding:13px 15px;font-weight:800;font-size:14px;background:var(--yellow);color:#171717;cursor:pointer}button.secondary{background:#262626;color:white}button.red{background:var(--red);color:white}button:disabled{opacity:.5}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1}.note{font-size:12px;color:var(--muted);line-height:1.45}.status{padding:10px 12px;border-radius:10px;background:#fef9c3;font-size:13px;margin:10px 0}.good{background:#dcfce7}.bad{background:#fee2e2}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs button{background:#e5e5e5}.tabs button.active{background:var(--yellow)}#map{height:340px;border-radius:12px;z-index:1}.ride{border:1px solid #e5e5e5;padding:12px;border-radius:12px;margin:8px 0}.small{font-size:12px;color:var(--muted)}.footer{text-align:center;padding:20px;color:#737373;font-size:11px}.pill{display:inline-block;border-radius:20px;padding:4px 9px;background:#fef3c7;font-size:11px;font-weight:800}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.danger{color:#b91c1c}.ok{color:#15803d}.statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.statbox{background:#171717;color:white;border-radius:12px;padding:13px}.statbox b{display:block;color:#facc15;font-size:23px}.adminitem{border:1px solid #e5e5e5;border-radius:12px;padding:12px;margin:9px 0}.adminitem .meta{font-size:12px;color:#737373;margin:5px 0}.adminitem button{margin:5px 5px 0 0}.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:12px}td,th{text-align:left;padding:8px;border-bottom:1px solid #e5e5e5;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -38,6 +38,20 @@
 <div class="card"><h2>Minha corrida</h2><div id="driverRide" class="small">Nenhuma corrida ativa.</div><div class="actions"><button id="startRide" class="hidden">Iniciar corrida</button><button id="finishRide" class="hidden">Finalizar corrida</button></div></div>
 </section>
 </section>
+<section id="adminArea" class="hidden">
+  <div class="card">
+    <div class="row"><h2>Painel administrativo</h2><button id="refreshAdmin" class="secondary">Atualizar</button></div>
+    <div class="statgrid">
+      <div class="statbox"><span class="small">Motociclistas</span><b id="statDrivers">0</b></div>
+      <div class="statbox"><span class="small">Pendentes</span><b id="statPending">0</b></div>
+      <div class="statbox"><span class="small">Online</span><b id="statOnline">0</b></div>
+      <div class="statbox"><span class="small">Comissões</span><b id="statCommission">R$ 0,00</b></div>
+    </div>
+    <p class="note">Resumo atualizado diretamente pelo Supabase. A comissão exibida soma o campo commission das corridas concluídas; confirme que esse campo é preenchido corretamente antes de usar como fechamento financeiro.</p>
+  </div>
+  <div class="card"><h2>Cadastros de motociclistas</h2><div id="adminDrivers">Carregando...</div></div>
+  <div class="card"><h2>Corridas</h2><div id="adminRides">Carregando...</div></div>
+</section>
 <div class="footer">GDA Moto · Protótipo conectado · Não utilizar para transporte comercial antes da validação técnica, legal e operacional.</div>
 </main>
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -58,7 +72,7 @@ $('authBtn').onclick=async()=>{const email=$('email').value.trim(),password=$('p
 async function finishSignupRole(role){if(role==='driver'){const {error}=await db.rpc('choose_initial_driver_role');if(error)throw error}}
 $('resetBtn').onclick=async()=>{const email=$('email').value.trim();if(!email){message('authMsg','Digite seu e-mail primeiro.','bad');return}const {error}=await db.auth.resetPasswordForEmail(email);message('authMsg',error?error.message:'Se o e-mail estiver cadastrado, você receberá instruções para redefinir a senha.',error?'bad':'good')};
 $('logoutBtn').onclick=async()=>{stopGps();if(rideChannel)await db.removeChannel(rideChannel);if(driverChannel)await db.removeChannel(driverChannel);await db.auth.signOut();location.reload()};
-async function boot(){const {data:{user}}=await db.auth.getUser();if(!user)return;currentUser=user;let {data:p,error}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(error)throw error;if(!p)throw Error('Perfil ainda não foi criado. Aguarde alguns segundos e entre novamente.');if(user.user_metadata?.requested_role==='driver'&&p.role==='passenger'){const chosen=await db.rpc('choose_initial_driver_role');if(chosen.error)throw chosen.error;const refreshed=await db.from('profiles').select('*').eq('id',user.id).single();if(refreshed.error)throw refreshed.error;p=refreshed.data}profile=p;$('authCard').classList.add('hidden');show('appArea');$('welcome').textContent='Olá, '+(p.full_name||user.email);$('userRole').textContent=p.role==='driver'?'Área do motociclista':p.role==='admin'?'Administrador':'Área do passageiro';if(p.role==='driver'){show('driverArea');hide('passengerArea');await loadDriver()}else if(p.role==='admin'){message('appMsg','Conta administrativa detectada. O painel de administração será disponibilizado em uma etapa protegida.')}else{show('passengerArea');hide('driverArea');await setupPassenger()}subscribeRideUpdates()}
+async function boot(){const {data:{user}}=await db.auth.getUser();if(!user)return;currentUser=user;let {data:p,error}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(error)throw error;if(!p)throw Error('Perfil ainda não foi criado. Aguarde alguns segundos e entre novamente.');if(user.user_metadata?.requested_role==='driver'&&p.role==='passenger'){const chosen=await db.rpc('choose_initial_driver_role');if(chosen.error)throw chosen.error;const refreshed=await db.from('profiles').select('*').eq('id',user.id).single();if(refreshed.error)throw refreshed.error;p=refreshed.data}profile=p;$('authCard').classList.add('hidden');show('appArea');$('welcome').textContent='Olá, '+(p.full_name||user.email);$('userRole').textContent=p.role==='driver'?'Área do motociclista':p.role==='admin'?'Administrador':'Área do passageiro';if(p.role==='driver'){show('driverArea');hide('passengerArea');await loadDriver()}else if(p.role==='admin'){show('adminArea');hide('passengerArea');hide('driverArea');await loadAdminDashboard()}else{show('passengerArea');hide('driverArea');await setupPassenger()}subscribeRideUpdates()}
 async function loadDriver(){const {data,error}=await db.from('driver_profiles').select('*').eq('user_id',currentUser.id).maybeSingle();if(error)throw error;driverProfile=data;if(!data){$('driverStatus').textContent='Você ainda não enviou o cadastro de motociclista.';const form=document.createElement('div');form.innerHTML='<label>Modelo da moto</label><input id="bikeModel" placeholder="Ex.: Honda CG 160"><label>Placa</label><input id="bikePlate" placeholder="ABC1D23"><label>Número da CNH</label><input id="license" placeholder="Número da habilitação"><div class="actions"><button id="sendDriver">Enviar cadastro</button></div><p class="note">Informe os dados solicitados. O cadastro ficará pendente até análise administrativa. Não envie fotos de documentos nesta versão de teste.</p>';$('driverArea').prepend(form);$('sendDriver').onclick=async()=>{try{const {data,error}=await db.rpc('register_driver',{p_motorcycle_model:$('bikeModel').value,p_motorcycle_plate:$('bikePlate').value,p_license_number:$('license').value});if(error)throw error;message('appMsg',data,'good');location.reload()}catch(e){message('appMsg',e.message,'bad')}};return}if(data.approval_status!=='approved'){$('driverStatus').textContent=data.approval_status==='pending'?'Cadastro aguardando aprovação administrativa.':'Cadastro reprovado. Entre em contato com a administração.';$('onlineBtn').disabled=true;$('offlineBtn').disabled=true;return}$('driverStatus').textContent=data.is_online?'Aprovado · Online':'Aprovado · Offline';$('onlineBtn').onclick=()=>setOnline(true);$('offlineBtn').onclick=()=>setOnline(false);if(data.is_online)startGps();await loadOpenRides();}
 async function setOnline(value){try{const {data,error}=await db.rpc('set_driver_online',{p_online:value});if(error)throw error;message('appMsg',data,'good');if(value)startGps();else stopGps();await loadDriver()}catch(e){message('appMsg',e.message,'bad')}}
 function startGps(){if(!navigator.geolocation){message('appMsg','Este navegador não oferece geolocalização.','bad');return}if(watchId!==null)return;watchId=navigator.geolocation.watchPosition(async pos=>{const {latitude,longitude}=pos.coords;const {error}=await db.rpc('set_driver_location',{p_latitude:latitude,p_longitude:longitude});if(error)message('appMsg',error.message,'bad')},err=>message('appMsg','Erro no GPS: '+err.message,'bad'),{enableHighAccuracy:true,maximumAge:5000,timeout:15000})}
@@ -73,6 +87,63 @@ async function loadOpenRides(){const {data,error}=await db.from('rides').select(
 async function loadMyRide(){const col=profile.role==='driver'?'driver_id':'passenger_id';const {data,error}=await db.from('rides').select('*').eq(col,currentUser.id).in('status',['requested','accepted','in_progress']).order('created_at',{ascending:false}).limit(1).maybeSingle();if(error){message('appMsg',error.message,'bad');return}activeRide=data;if(profile.role==='driver'){$('driverRide').textContent=data?'Status: '+data.status+' · Corrida: '+data.id:'Nenhuma corrida ativa.';$('startRide').classList.toggle('hidden',!data||data.status!=='accepted');$('finishRide').classList.toggle('hidden',!data||data.status!=='in_progress')}else{$('passengerRide').textContent=data?'Status: '+data.status+' · Corrida: '+data.id:'Nenhuma corrida ativa.';$('cancelRide').classList.toggle('hidden',!data||data.status!=='requested')}}
 $('cancelRide').onclick=()=>changeRide('cancelled');$('startRide').onclick=()=>changeRide('in_progress');$('finishRide').onclick=()=>changeRide('completed');async function changeRide(status){if(!activeRide)return;const {data,error}=await db.rpc('update_ride_status',{p_ride_id:activeRide.id,p_new_status:status});if(error){message('appMsg',error.message,'bad');return}message('appMsg',data,'good');await loadMyRide()}
 function subscribeRideUpdates(){rideChannel=db.channel('gda-rides-'+currentUser.id).on('postgres_changes',{event:'*',schema:'public',table:'rides'},async()=>{await loadMyRide();if(profile.role==='driver')await loadOpenRides()}).subscribe();if(profile.role==='passenger'){driverChannel=db.channel('gda-drivers-'+currentUser.id).on('postgres_changes',{event:'*',schema:'public',table:'driver_locations'},loadDrivers).subscribe()}else if(profile.role==='driver'){setInterval(loadOpenRides,12000)}loadMyRide()}
+async function loadAdminDashboard(){
+  $('adminDrivers').textContent='Carregando cadastros...';
+  $('adminRides').textContent='Carregando corridas...';
+  try{
+    const {data,error}=await db.rpc('admin_get_dashboard');
+    if(error)throw error;
+    const result=data||{};
+    const drivers=Array.isArray(result.drivers)?result.drivers:[];
+    const rides=Array.isArray(result.rides)?result.rides:[];
+    $('statDrivers').textContent=drivers.length;
+    $('statPending').textContent=drivers.filter(d=>d.status==='pending').length;
+    $('statOnline').textContent=drivers.filter(d=>d.online===true).length;
+    $('statCommission').textContent=Number(result.commission_total||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+    const driverBox=$('adminDrivers');driverBox.innerHTML='';
+    if(!drivers.length){driverBox.textContent='Nenhum cadastro de motociclista encontrado.'}
+    drivers.sort((a,b)=>(a.status==='pending'?-1:1)-(b.status==='pending'?-1:1));
+    drivers.forEach(d=>{
+      const item=document.createElement('div');item.className='adminitem';
+      const statusLabel=d.status==='approved'?'Aprovado':d.status==='rejected'?'Rejeitado':'Pendente';
+      item.innerHTML='<div class="row"><b>'+safe(d.name||'Sem nome')+'</b><span class="pill">'+safe(statusLabel)+'</span></div>'+
+        '<div class="meta">Moto: '+safe(d.model||'Não informada')+' · Placa: '+safe(d.plate||'Não informada')+'</div>'+
+        '<div class="meta">Telefone: '+safe(d.phone||'Não informado')+' · '+(d.online?'Online':'Offline')+'</div>';
+      if(d.status!=='approved'){
+        const approve=document.createElement('button');approve.textContent='Aprovar';approve.onclick=()=>setDriverApproval(d.id,'approved');
+        item.appendChild(approve);
+      }
+      if(d.status!=='rejected'){
+        const reject=document.createElement('button');reject.textContent='Rejeitar';reject.className='red';reject.onclick=()=>setDriverApproval(d.id,'rejected');
+        item.appendChild(reject);
+      }
+      driverBox.appendChild(item);
+    });
+    const rideBox=$('adminRides');rideBox.innerHTML='';
+    if(!rides.length){rideBox.textContent='Nenhuma corrida registrada.'}
+    rides.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+    rides.slice(0,50).forEach(r=>{
+      const item=document.createElement('div');item.className='adminitem';
+      item.innerHTML='<b>Corrida '+safe(String(r.id||'').slice(0,8))+'</b>'+
+        '<div class="meta">Passageiro: '+safe(r.passenger||'—')+' · Motociclista: '+safe(r.driver||'Aguardando')+'</div>'+
+        '<div class="meta">Status: '+safe(r.status||'—')+' · Pagamento: '+safe(r.payment||'—')+'</div>'+
+        '<div class="meta">Valor: '+Number(r.price||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})+' · Comissão: '+Number(r.commission||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})+'</div>';
+      rideBox.appendChild(item);
+    });
+    hide('appMsg');
+  }catch(e){message('appMsg','Erro ao carregar painel: '+(e.message||e),'bad');$('adminDrivers').textContent='Não foi possível carregar os cadastros.';$('adminRides').textContent='Não foi possível carregar as corridas.'}
+}
+async function setDriverApproval(driverId,status){
+  const action=status==='approved'?'aprovar':'rejeitar';
+  if(!confirm('Confirma '+action+' este cadastro?'))return;
+  try{
+    const {data,error}=await db.rpc('admin_set_driver_approval',{p_driver_id:driverId,p_status:status});
+    if(error)throw error;
+    message('appMsg','Cadastro atualizado: '+(data||status),'good');
+    await loadAdminDashboard();
+  }catch(e){message('appMsg','Não foi possível atualizar: '+(e.message||e),'bad')}
+}
+$('refreshAdmin').onclick=loadAdminDashboard;
 function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 db.auth.getSession().then(({data:{session}})=>{if(session)boot().catch(e=>message('appMsg',e.message,'bad'))});db.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&session&&!currentUser)boot().catch(e=>message('authMsg',e.message,'bad'))});
 </script>
