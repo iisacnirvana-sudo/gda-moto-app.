@@ -80,3 +80,8 @@ revoke all on function public.request_ride_from_edge(
 grant execute on function public.request_ride_from_edge(
   uuid, double precision, double precision, double precision, double precision, text, numeric, numeric
 ) to service_role;
+
+-- Desativa a RPC antiga, que criava corridas sem preço calculado.
+revoke all on function public.request_ride(
+  double precision, double precision, double precision, double precision, text
+) from public, anon, authenticated;
