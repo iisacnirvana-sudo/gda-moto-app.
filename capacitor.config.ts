@@ -4,7 +4,6 @@ const config: CapacitorConfig = {
   appId: 'br.com.gdamoto.app',
   appName: 'GDA Moto',
   webDir: 'www',
-  bundledWebRuntime: false,
   server: {
     androidScheme: 'https'
   }
