@@ -1,0 +1,17 @@
+GDA Moto — preparação da tarifa por rota real
+
+Arquivos:
+- supabase/functions/request-ride/index.ts: Edge Function que valida o usuário, consulta a rota viária pelo OSRM e calcula a tarifa.
+- supabase/sql/request_ride_from_edge.sql: função SQL interna chamada pela Edge Function.
+
+Regra de preço:
+- R$ 2,50 por km de rota de rua.
+- Valor mínimo: R$ 7,00.
+- Comissão da plataforma: 10% do valor da corrida, registrada ao finalizar (a função update_ride_status existente deve continuar sendo usada).
+
+IMPORTANTE:
+1. Não publique a Edge Function antes de executar o SQL.
+2. No Supabase, crie/deploy a Edge Function com o nome request-ride e cole o conteúdo de index.ts.
+3. A função usa os secrets padrão SUPABASE_URL, SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY disponíveis no ambiente Edge Functions. Nunca coloque service_role no index.html.
+4. O frontend ainda chama a RPC antiga request_ride. Ele só deverá ser atualizado para chamar request-ride depois que a Edge Function estiver publicada e testada.
+5. O OSRM público é adequado para protótipo/testes, mas tem limites de uso e não oferece SLA. Para operação comercial, contratar/provisionar um serviço de rotas confiável.
